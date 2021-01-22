@@ -5,14 +5,31 @@ const StatusMessage = ({ winner, current }) => {
    
    
     return (
-        <h2>
-           {winner && `winner is ${winner}`}
-           {!winner && 
-           !noMoveLest && 
-           `Next player is ${current.isXNext ? 'X' : 'O'}`}
-           {!winner && noMoveLest && 'X and O tied'}
-           </h2>
-    )
+        <div className="status-message">
+           {winner && (
+           <>
+           winner is{' '}
+            <samp className={winner === 'X' ? 'text-green' : 'text-orange'}>
+               {winner}
+            </samp>
+           </>
+           )}
+           {!winner && !noMoveLest && (
+           <>
+           Next player is{' '} 
+           <samp className={current.isXNext ? 'text-green' : 'text-orange'}>   
+            {current.isXNext ? 'X' : 'O'}{' '}
+            </samp>
+            </>
+           )}
+           {!winner && noMoveLest && (
+           <>
+           <span className="text-green">X</span> and{' '} 
+           <span className="text-orange">O</span> tied
+           </>
+           )}
+        </div>
+    );
 };
 
 export default StatusMessage;
